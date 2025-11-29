@@ -59,18 +59,24 @@ export default function EditDialog({plant}: EditDialogProps) {
         >
           <span>
             <EditIcon className="w-4 h-4" />
-            Edit Plant
           </span>
         </Button>{" "}
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Add a Plant</AlertDialogTitle>
-          <AlertDialogDescription>
-            Fill out the form to add a new plant to your inventory.
-          </AlertDialogDescription>
         </AlertDialogHeader>
         <form onSubmit={handleSubmit}>
+          <div className="py-1">
+            <Label>Upload Image</Label>
+            <ImageUpload
+              endpoint="postImage"
+              value={formData.imageUrl}
+              onChange={(url) => {
+                handleChange("imageUrl", url);
+              }}
+            />
+          </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label htmlFor="name">Name</Label>
@@ -98,7 +104,7 @@ export default function EditDialog({plant}: EditDialogProps) {
             value={formData.description}
             onChange={(e) => handleChange("description", e.target.value)}
           />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 mb-3">
             <div>
               <Label htmlFor="stock">Stock</Label>
               <Input
@@ -121,15 +127,7 @@ export default function EditDialog({plant}: EditDialogProps) {
             </div>
           </div>
           {/*Image Upload*/}
-          <div className="py-5">
-            <ImageUpload
-              endpoint="postImage"
-              value={formData.imageUrl}
-              onChange={(url) => {
-                handleChange("imageUrl", url);
-              }}
-            />
-          </div>
+          
 
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>

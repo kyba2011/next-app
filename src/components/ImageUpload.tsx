@@ -12,7 +12,7 @@ interface ImageUploadProps {
 function ImageUpload({ endpoint, onChange, value }: ImageUploadProps) {
   if (value) {
     return (
-      <div className="relative size-40">
+      <div className="relative h-40">
         <img
           src={value}
           alt="Upload"
@@ -34,18 +34,15 @@ function ImageUpload({ endpoint, onChange, value }: ImageUploadProps) {
       <UploadDropzone<OurFileRouter, "postImage">
         endpoint={endpoint}
         onClientUploadComplete={(res) => {
-          // Do something with the response
           console.log("Files: ", res);
-                    //updates the image
-
           if (res && res[0]?.ufsUrl) {
             onChange(res[0].ufsUrl);
           }
-        
         }}
         onUploadError={(error: Error) => {
           alert(`ERROR! ${error.message}`);
         }}
+        className="flex w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm [&>svg]:h-14 [&>svg]:w-14 cursor-pointer" // Add pointer cursor
       />
     </div>
   );

@@ -17,6 +17,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useId } from "@radix-ui/react-id";
 
 interface ComboboxProps {
   value: string;
@@ -37,11 +38,13 @@ const plantCategories = [
 
 export function Combobox({ value, onChange }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
+  const id = useId(); // Generate a consistent ID
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          id={id} // Assign the stable ID
           variant="outline"
           role="combobox"
           aria-expanded={open}
