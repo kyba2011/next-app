@@ -119,11 +119,11 @@ export default function InventoryTable({ plants }: InventoryTableProps) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Plant ID</TableHead>
+            <TableHead>ID</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Category</TableHead>
             <TableHead>Price</TableHead>
-            <TableHead>Srock</TableHead>
+            <TableHead>Stock</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>

@@ -11,7 +11,7 @@ async function page() {
   return (
     <>
       {user ? (
-        <div className="mt-7 max-w-7xl ms-auto px-4 grid grid-cols-1 lg:grid-cols-10 gap-6">
+        <div className="mt-7 max-w-7xl m-auto px-4 grid grid-cols-1 lg:grid-cols-10 gap-6">
           <div className="lg:col-span-full">
             <InventoryTable plants={plants}/>
           </div>
