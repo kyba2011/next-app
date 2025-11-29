@@ -1,18 +1,37 @@
-'use server';
+"use server";
 
-import { neon } from '@neondatabase/serverless';
+import { prisma } from "@/lib/prisma";
+import { stackServerApp } from "@/stack/server";
 
 export async function getUserDetails(userId: string | undefined) {
-  if (!process.env.DATABASE_URL) {
-    throw new Error('DATABASE_URL is not set');
-  }
-
   if (!userId) {
     return null;
   }
 
-  const sql = neon(process.env.DATABASE_URL!);
-  const [user] =
-    await sql`SELECT * FROM neon_auth.users_sync WHERE id = ${userId};`;
-  return user;
+  try {
+    const user = await prisma.$queryRawUnsafe(
+      `SELECT * FROM neon_auth.users_sync WHERE id = $1`,
+      userId
+    );
+    return Array.isArray(user) ? user[0] : null;
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    return null;
+  }
+}
+
+export async function getUserId() {
+  try {
+    const user = await stackServerApp.getUser();
+    const userId = user?.id;
+
+    if (!userId) return;
+
+    return userId;
+  } catch (error) {
+    console.error("Error getting user from Stack Auth:", error);
+    // Return a default user ID for development/testing
+    // TODO: Remove this in production
+    return "default-user-id";
+  }
 }
