@@ -66,6 +66,16 @@ export default function CreateDialog() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <form onSubmit={handleSubmit}>
+          {/*Image Upload*/}
+          <div className="py-5">
+            <ImageUpload
+              endpoint="postImage"
+              value={formData.imageUrl}
+              onChange={(url) => {
+                handleChange("imageUrl", url);
+              }}
+            />
+          </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label htmlFor="name">Name</Label>
@@ -116,16 +126,7 @@ export default function CreateDialog() {
             </div>
           </div>
           {/* <h1>Upload img</h1> */}
-          {/*Image Upload*/}
-          <div className="py-5">
-            <ImageUpload
-              endpoint="postImage"
-              value={formData.imageUrl}
-              onChange={(url) => {
-                handleChange("imageUrl", url);
-              }}
-            />
-          </div>
+          
 
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
